@@ -1,0 +1,44 @@
+# cloud-cost-rightsizer configuration
+# Copy this file to config.yaml and adjust for your environment.
+# config.yaml is gitignored — never commit real values.
+
+analysis:
+  lookback_days: 14              # Days of CloudWatch data to analyze
+  metrics_period_seconds: 3600   # Granularity: 3600 = 1-hour buckets
+
+thresholds:
+  cpu_max_p95: 20        # Flag if p95 CPU < 20%
+  memory_max_p95: 30     # Flag if p95 memory < 30% (requires CloudWatch Agent)
+  network_max_mbps: 100  # For reference only — not currently used in recommendations
+
+exclusions:
+  # Never recommend changes for these specific instance IDs
+  instance_ids: []
+    # - i-0123456789abcdef0
+
+  # Exclude by tag — e.g. instances tagged DoNotRightsize: "true"
+  tags: {}
+    # DoNotRightsize: "true"
+    # Env: dev
+
+  # Skip entire instance families — t3/t3a metrics are misleading due to bursting
+  instance_families:
+    - t3
+    - t3a
+
+reporting:
+  formats:
+    - csv
+    - json
+    - summary
+
+  slack:
+    enabled: false
+    # Set webhook URL via SLACK_WEBHOOK_URL environment variable — not here
+    webhook_url: ""
+    channel: "#finops"
+    mention_on_savings_above: 10000  # @channel if monthly savings > $10k
+
+pricing:
+  cache_enabled: true
+  cache_ttl_hours: 24  # Re-fetch prices after 24 hours
