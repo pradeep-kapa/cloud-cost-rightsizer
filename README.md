@@ -1,6 +1,6 @@
 # cloud-cost-rightsizer
 
-Automated EC2 rightsizing tool that pulls CloudWatch utilization metrics, identifies over-provisioned instances, and generates actionable recommendations with estimated savings. Built from patterns used at Nielsen and Nymbus to consistently hit 20–40% cloud cost reductions without impacting workload performance.
+Automated EC2 rightsizing tool that pulls CloudWatch utilization metrics, identifies over-provisioned instances, and generates actionable recommendations with estimated savings. Built from patterns used at Industry Standards to consistently hit 20–40% cloud cost reductions without impacting workload performance.
 
 The tool doesn't make changes automatically — it generates reports and recommendations. You decide what to act on. This is intentional: auto-rightsizing production workloads without human review is how you cause incidents.
 
